@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakin Arama</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f1ede3;
+    --paper: #faf8f2;
+    --ink: #20211c;
+    --muted: #7c7a6e;
+    --line: #d8d3c4;
+    --clay: #b8492f;
+    --clay-soft: #e8d6cf;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    background-image:
+      radial-gradient(circle at 18% 22%, rgba(184,73,47,0.05), transparent 45%),
+      radial-gradient(circle at 82% 78%, rgba(124,122,110,0.07), transparent 50%);
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 620px;
+    text-align: center;
+    animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .mark {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .mark .dot { color: var(--clay); }
+
+  .sub {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-top: 12px;
+    margin-bottom: 36px;
+  }
+
+  .search-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 8px;
+    box-shadow: 0 18px 40px -28px rgba(32,33,28,0.5);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .search-card:focus-within {
+    border-color: var(--clay);
+    box-shadow: 0 22px 46px -26px rgba(184,73,47,0.45);
+  }
+
+  .row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  input[type="text"] {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+    padding: 14px 10px 14px 16px;
+    outline: none;
+  }
+  input::placeholder { color: var(--muted); }
+
+  button.go {
+    border: none;
+    background: var(--clay);
+    color: #faf8f2;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 13px 22px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.12s ease, background 0.2s ease;
+  }
+  button.go:hover { background: #9e3c25; }
+  button.go:active { transform: scale(0.97); }
+
+  .filters {
+    display: flex;
+    gap: 6px;
+    margin-top: 14px;
+    justify-content: center;
+  }
+
+  .chip {
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    padding: 6px 14px;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+  .chip:hover { border-color: var(--clay); color: var(--ink); }
+  .chip.active {
+    background: var(--clay-soft);
+    border-color: var(--clay);
+    color: var(--clay);
+    font-weight: 500;
+  }
+
+  .links {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    justify-content: center;
+  }
+
+  .links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    position: relative;
+    transition: color 0.18s ease;
+  }
+  .links a:hover { color: var(--clay); }
+  .links a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -3px;
+    width: 0; height: 1px;
+    background: var(--clay);
+    transition: width 0.2s ease;
+  }
+  .links a:hover::after { width: 100%; }
+
+  .note {
+    margin-top: 34px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .note b { color: var(--ink); font-weight: 500; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 class="mark">Sakin Arama<span class="dot">.</span></h1>
+    <p class="sub">Ana sayfa akışı yok, öneri yok. Sadece aradığın video.</p>
+
+    <div class="search-card">
+      <div class="row">
+        <input type="text" id="q" placeholder="Ne aramak istiyorsun?" autofocus autocomplete="off">
+        <button class="go" id="goBtn">Ara</button>
+      </div>
+    </div>
+
+    <div class="filters">
+      <button class="chip active" data-sp="">Hepsi</button>
+      <button class="chip" data-sp="EgIQAQ%3D%3D">Videolar</button>
+      <button class="chip" data-sp="EgIQAg%3D%3D">Kanallar</button>
+      <button class="chip" data-sp="EgIQAw%3D%3D">Oynatma listeleri</button>
+    </div>
+
+    <nav class="links">
+      <a href="https://www.youtube.com/feed/subscriptions">Abonelikler</a>
+      <a href="https://www.youtube.com/playlist?list=WL">Daha sonra izle</a>
+      <a href="https://www.youtube.com/playlist?list=LL">Beğenilenler</a>
+      <a href="https://www.youtube.com/feed/history">Geçmiş</a>
+      <a href="https://www.youtube.com/feed/playlists">Listelerim</a>
+    </nav>
+
+    <p class="note">
+      İpucu: YouTube'da <b>izleme geçmişini duraklatırsan</b> ana sayfa
+      tamamen boş açılır ve hiç video önermez. Bu sayfayı tarayıcının
+      <b>başlangıç sayfası</b> yaparsan YouTube'a hep buradan girersin.
+    </p>
+  </div>
+
+<script>
+  let sp = "";
+
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      sp = chip.dataset.sp;
+    });
+  });
+
+  function search() {
+    const term = document.getElementById('q').value.trim();
+    if (!term) return;
+    let url = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(term);
+    if (sp) url += '&sp=' + sp;
+    window.location.href = url;
+  }
+
+  document.getElementById('goBtn').addEventListener('click', search);
+  document.getElementById('q').addEventListener('keydown', e => {
+    if (e.key === 'Enter') search();
+  });
+</script>
+</body>
+</html>
