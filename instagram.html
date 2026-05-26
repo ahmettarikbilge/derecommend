@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Sakin Instagram</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Sakin IG">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#f1ede3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f1ede3;
+    --paper: #faf8f2;
+    --ink: #20211c;
+    --muted: #7c7a6e;
+    --line: #d8d3c4;
+    --berry: #8a3a5c;
+    --berry-soft: #e7d3dc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    padding: calc(env(safe-area-inset-top) + 56px) 22px calc(env(safe-area-inset-bottom) + 32px);
+    background-image:
+      radial-gradient(circle at 15% 12%, rgba(138,58,92,0.07), transparent 50%),
+      radial-gradient(circle at 88% 88%, rgba(124,122,110,0.08), transparent 55%);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .mark {
+    font-family: 'Fraunces', serif;
+    font-size: 2.7rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .mark .dot { color: var(--berry); }
+
+  .sub {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-top: 10px;
+    margin-bottom: 24px;
+  }
+
+  .toggle {
+    display: flex;
+    gap: 6px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    padding: 5px;
+    margin-bottom: 12px;
+  }
+  .toggle button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 12px;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: all 0.16s ease;
+  }
+  .toggle button.active {
+    background: var(--berry-soft);
+    color: var(--berry);
+  }
+
+  .search-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 14px 34px -26px rgba(32,33,28,0.5);
+  }
+  .search-card:focus-within { border-color: var(--berry); }
+
+  .prefix {
+    padding-left: 14px;
+    color: var(--muted);
+    font-size: 17px;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    color: var(--ink);
+    padding: 16px 10px;
+    outline: none;
+  }
+  input::placeholder { color: var(--muted); }
+
+  button.go {
+    width: 100%;
+    border: none;
+    background: var(--berry);
+    color: #faf8f2;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 17px;
+    border-radius: 13px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: transform 0.1s ease, background 0.2s ease;
+  }
+  button.go:active { transform: scale(0.98); background: #6f2d49; }
+
+  .links-title {
+    margin-top: 34px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .links a {
+    display: block;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    padding: 16px 14px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: transform 0.1s ease, border-color 0.16s ease;
+  }
+  .links a:active { transform: scale(0.97); border-color: var(--berry); }
+
+  .note {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .note b { color: var(--ink); font-weight: 500; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 class="mark">Sakin Instagram<span class="dot">.</span></h1>
+    <p class="sub">Akış yok, Keşfet yok. Doğrudan bakmak istediğin yere.</p>
+
+    <div class="toggle">
+      <button id="tProfil" class="active">Profil</button>
+      <button id="tEtiket">Etiket</button>
+    </div>
+
+    <div class="search-card">
+      <span class="prefix" id="prefix">@</span>
+      <input type="text" id="q" placeholder="kullanıcı adı" autocomplete="off" autocapitalize="none" enterkeyhint="go">
+    </div>
+    <button class="go" id="goBtn">Git</button>
+
+    <p class="links-title">Hızlı erişim</p>
+    <nav class="links">
+      <a href="https://www.instagram.com/direct/inbox/">Mesajlar</a>
+      <a href="https://www.instagram.com/your_activity/interactions/">Etkinliğim</a>
+    </nav>
+
+    <p class="note">
+      Not: Instagram'da ana akışı tamamen kapatmak mümkün değil — bu sayfa
+      seni akışa hiç uğratmadan <b>doğrudan aradığın profile veya etikete</b>
+      götürür. Bir kişiye sık bakıyorsan adını bana söyle, ona da bir
+      <b>hızlı erişim düğmesi</b> ekleyeyim.
+    </p>
+  </div>
+
+<script>
+  let mode = 'profil';
+  const q = document.getElementById('q');
+  const prefix = document.getElementById('prefix');
+  const tProfil = document.getElementById('tProfil');
+  const tEtiket = document.getElementById('tEtiket');
+
+  function setMode(m) {
+    mode = m;
+    if (m === 'profil') {
+      tProfil.classList.add('active');
+      tEtiket.classList.remove('active');
+      prefix.textContent = '@';
+      q.placeholder = 'kullanıcı adı';
+    } else {
+      tEtiket.classList.add('active');
+      tProfil.classList.remove('active');
+      prefix.textContent = '#';
+      q.placeholder = 'etiket (# olmadan)';
+    }
+    q.focus();
+  }
+
+  tProfil.addEventListener('click', () => setMode('profil'));
+  tEtiket.addEventListener('click', () => setMode('etiket'));
+
+  function go() {
+    let v = q.value.trim().replace(/^[@#\s]+/, '');
+    if (!v) return;
+    let url;
+    if (mode === 'profil') {
+      url = 'https://www.instagram.com/' + encodeURIComponent(v) + '/';
+    } else {
+      url = 'https://www.instagram.com/explore/tags/' + encodeURIComponent(v.toLowerCase()) + '/';
+    }
+    window.location.href = url;
+  }
+
+  document.getElementById('goBtn').addEventListener('click', go);
+  q.addEventListener('keydown', e => {
+    if (e.key === 'Enter') go();
+  });
+</script>
+</body>
+</html>
